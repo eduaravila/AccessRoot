@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack",
-    "postinstall": "netlify-lambda install",
     "start-live": "nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev",
     "build": "netlify-lambda build dist/src"
   },
@@ -32,6 +31,7 @@
     "class-validator": "^0.11.0",
     "crypto-js": "^3.3.0",
     "dotenv": "^8.2.0",
+    "encoding": "^0.1.12",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "express-ip": "^1.0.3",
