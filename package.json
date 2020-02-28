@@ -28,6 +28,7 @@
     "aws-sdk": "^2.628.0",
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
+    "bufferutil": "^4.0.1",
     "class-validator": "^0.11.0",
     "crypto-js": "^3.3.0",
     "dotenv": "^8.2.0",
@@ -41,12 +42,15 @@
     "moment": "^2.24.0",
     "mongoose": "^5.8.10",
     "netlify-lambda": "^1.6.3",
+    "node-gyp": "^6.1.0",
     "nodemailer": "^6.4.2",
     "nodemon": "^2.0.2",
     "randomatic": "^3.1.1",
     "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
     "serverless-http": "^2.3.2",
     "type-graphql": "^0.18.0-beta.10",
+    "utf-8-validate": "^5.0.2",
     "validator": "12.0.0"
   },
   "devDependencies": {
