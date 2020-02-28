@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
+const serverless_http_1 = __importDefault(require("serverless-http"));
 const buildFederatedSchema_1 = require("./helpers/buildFederatedSchema");
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_ip_1 = __importDefault(require("express-ip"));
@@ -21,12 +22,11 @@ const express_ip_1 = __importDefault(require("express-ip"));
 require("reflect-metadata");
 const index_1 = __importDefault(require("./DB/index"));
 const UserResolver_1 = require("./resolvers/UserResolver");
-const PORT = process.env.PORT;
-console.log(PORT);
+const PORT = process.env.PORT || "3000";
+const app = express_1.default();
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Initialize the app
-        const app = express_1.default();
         app.use(/\/((?!graphql).)*/, body_parser_1.default.urlencoded({
             limit: "50mb",
             extended: true
@@ -61,15 +61,13 @@ console.log(PORT);
             introspection: true
         });
         // The GraphQL endpoint
-        server.applyMiddleware({ app, path: "/graphql" });
         // Start the server
         yield index_1.default();
-        app.listen(PORT, () => {
-            console.log(`Go to http://localhost:${PORT}/graphiql to run queries!`);
-        });
+        server.applyMiddleware({ app, path: "/graphql" });
     }
     catch (error) {
         console.log(error);
     }
 }))();
+module.exports.handler = serverless_http_1.default(app);
 //# sourceMappingURL=index.js.map

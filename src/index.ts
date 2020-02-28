@@ -1,5 +1,6 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
+import serverless from "serverless-http";
 import { buildFederatedSchema } from "./helpers/buildFederatedSchema";
 import bp from "body-parser";
 import express_user_ip from "express-ip";
@@ -9,14 +10,12 @@ import "reflect-metadata";
 import connectDB from "./DB/index";
 import { RegisterResolver } from "./resolvers/UserResolver";
 
-const PORT: string = process.env.PORT;
+const PORT: string = process.env.PORT || "3000";
 
-console.log(PORT);
-
+const app = express();
 (async () => {
   try {
     // Initialize the app
-    const app = express();
     app.use(
       /\/((?!graphql).)*/,
       bp.urlencoded({
@@ -66,15 +65,14 @@ console.log(PORT);
       introspection: true
     });
     // The GraphQL endpoint
-    server.applyMiddleware({ app, path: "/graphql" });
 
     // Start the server
     await connectDB();
-
-    app.listen(PORT, () => {
-      console.log(`Go to http://localhost:${PORT}/graphiql to run queries!`);
-    });
+    server.applyMiddleware({ app, path: "/graphql" });
+    
   } catch (error) {
     console.log(error);
   }
 })();
+
+module.exports.handler = serverless(app);
