@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const connect_db = async () => {
   try {
     mongoose.set("useCreateIndex", true);
-    
+
     let db = process.env.DEV
       ? await mongoose.connect(`mongodb://127.0.0.1:27017/auth_root`, {
           useNewUrlParser: true,
@@ -17,10 +17,10 @@ const connect_db = async () => {
           }
         );
 
-    return Promise.resolve({ msg: "Data base conected", db });
+    return Promise.resolve({ msg: "Data base conected" });
   } catch (error) {
     console.log(error);
-    
+
     Promise.reject("Error with the data base conection");
   }
 };
