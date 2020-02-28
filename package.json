@@ -4,11 +4,11 @@
   "description": "Access root ecolote microservice",
   "main": "index.js",
   "scripts": {
-    "test": "jest --setupFiles dotenv/config --detectOpenHandles",
+    "test": "jest --setupFiles dotenv/config --forceExit --detectOpenHandles",
     "webpack": "webpack",
     "postinstall": "netlify-lambda install",
     "start-live": "nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev",
-    "build": "netlify-lambda build ./dist/src"
+    "build": "tsc"
   },
   "author": "Eduardo Avila",
   "license": "ISC",
@@ -54,6 +54,7 @@
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "serverless-http": "^2.3.2",
+    "tsc": "^1.20150623.0",
     "type-graphql": "^0.18.0-beta.10",
     "utf-8-validate": "^5.0.2",
     "validator": "12.0.0"
