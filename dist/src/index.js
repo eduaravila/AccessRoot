@@ -17,7 +17,6 @@ const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const body_parser_1 = __importDefault(require("body-parser"));
 const serverless_http_1 = __importDefault(require("serverless-http"));
-const express_ip_1 = __importDefault(require("express-ip"));
 const buildFederatedSchema_1 = require("./helpers/buildFederatedSchema");
 //?  decorators metadata
 const index_1 = __importDefault(require("./DB/index"));
@@ -38,7 +37,7 @@ router.get("/", (req, res) => {
     res.write("<h1>Hello from Express.js!</h1>");
     res.end();
 });
-app.use(express_ip_1.default().getIpInfoMiddleware); //* get the user location data
+// app.use(express_user_ip().getIpInfoMiddleware); //* get the user location data
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*"); //* dominios por donde se permite el acceso
     res.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE,UPDATE,PUT"); //* metodos permitidos por el cliente

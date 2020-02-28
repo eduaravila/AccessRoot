@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
   res.end();
 });
 
-app.use(express_user_ip().getIpInfoMiddleware); //* get the user location data
+// app.use(express_user_ip().getIpInfoMiddleware); //* get the user location data
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); //* dominios por donde se permite el acceso
