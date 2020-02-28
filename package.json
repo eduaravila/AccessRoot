@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack",
-    "start-live": "nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev"
+    "start-live": "nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev",
+    "build": "netlify-lambda build express",
   },
   "author": "Eduardo Avila",
   "license": "ISC",
