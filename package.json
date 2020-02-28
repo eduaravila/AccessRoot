@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack",
     "start-live": "nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev",
-    "build": "netlify-lambda build src"
+    "build": "netlify-lambda build dist/src"
   },
   "author": "Eduardo Avila",
   "license": "ISC",
@@ -48,7 +48,6 @@
     "validator": "12.0.0"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.8.3",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",
