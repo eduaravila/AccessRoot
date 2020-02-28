@@ -21,13 +21,14 @@ const connect_db = () => __awaiter(void 0, void 0, void 0, function* () {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             })
-            : yield mongoose_1.default.connect(`mongodb+srv://ECOLOTE:<${process.env.DB_PASS}>@cluster0-u30oq.mongodb.net/test?retryWrites=true&w=majority`, {
+            : yield mongoose_1.default.connect(`mongodb+srv://ECOLOTE:${process.env.DB_PASS}@cluster0-u30oq.mongodb.net/auth_root`, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             });
         return Promise.resolve({ msg: "Data base conected", db });
     }
     catch (error) {
+        console.log(error);
         Promise.reject("Error with the data base conection");
     }
 });

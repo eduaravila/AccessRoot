@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const apollo_server_lambda_1 = require("apollo-server-lambda");
+const apollo_server_express_1 = require("apollo-server-express");
 const buildFederatedSchema_1 = require("./helpers/buildFederatedSchema");
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_ip_1 = __importDefault(require("express-ip"));
@@ -46,7 +46,7 @@ const PORT = process.env.PORT || "3000";
             }
             next();
         });
-        const server = new apollo_server_lambda_1.ApolloServer({
+        const server = new apollo_server_express_1.ApolloServer({
             schema: yield buildFederatedSchema_1.buildFederatedSchema({
                 resolvers: [UserResolver_1.RegisterResolver]
             }),
@@ -63,7 +63,6 @@ const PORT = process.env.PORT || "3000";
         // Start the server
         yield index_1.default();
         app.listen(PORT, () => {
-            server.createHandler();
             console.log(`Go to http://localhost:${PORT}/graphiql to run queries!`);
         });
     }

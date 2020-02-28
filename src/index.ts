@@ -1,5 +1,5 @@
 import express from "express";
-import { ApolloServer } from "apollo-server-lambda";
+import { ApolloServer } from "apollo-server-express";
 import { buildFederatedSchema } from "./helpers/buildFederatedSchema";
 import bp from "body-parser";
 import express_user_ip from "express-ip";
@@ -69,7 +69,6 @@ const PORT: string = process.env.PORT || "3000";
     await connectDB();
 
     app.listen(PORT, () => {
-      server.createHandler();
       console.log(`Go to http://localhost:${PORT}/graphiql to run queries!`);
     });
   } catch (error) {
