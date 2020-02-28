@@ -9,7 +9,9 @@ import "reflect-metadata";
 import connectDB from "./DB/index";
 import { RegisterResolver } from "./resolvers/UserResolver";
 
-const PORT: string = process.env.PORT || "3000";
+const PORT: string = process.env.PORT;
+
+console.log(PORT);
 
 (async () => {
   try {

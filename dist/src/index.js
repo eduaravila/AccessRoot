@@ -21,7 +21,8 @@ const express_ip_1 = __importDefault(require("express-ip"));
 require("reflect-metadata");
 const index_1 = __importDefault(require("./DB/index"));
 const UserResolver_1 = require("./resolvers/UserResolver");
-const PORT = process.env.PORT || "3000";
+const PORT = process.env.PORT;
+console.log(PORT);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Initialize the app
