@@ -11,25 +11,27 @@ import connectDB from "./DB/index";
 import { RegisterResolver } from "./resolvers/UserResolver";
 
 const PORT: string = process.env.PORT || "3000";
-
 const app = express();
-(async () => {
-  try {
-    // Initialize the app
-    app.use(
-      /\/((?!graphql).)*/,
-      bp.urlencoded({
-        limit: "50mb",
-        extended: true
-      })
-    );
-    app.use(
-      /\/((?!graphql).)*/,
-      bp.json({
-        limit: "50mb"
-      })
-    );
 
+const handler = serverless(app);
+module.exports.handler = async (event: any, context: any) => {
+  const result = await handler(event, context);
+  // and here
+  app.use(
+    /\/((?!graphql).)*/,
+    bp.urlencoded({
+      limit: "50mb",
+      extended: true
+    })
+  );
+  app.use(
+    /\/((?!graphql).)*/,
+    bp.json({
+      limit: "50mb"
+    })
+  );
+  (async () => {})();
+  try {
     app.use(express_user_ip().getIpInfoMiddleware); //* get the user location data
 
     app.use((req, res, next) => {
@@ -69,10 +71,9 @@ const app = express();
     // Start the server
     await connectDB();
     server.applyMiddleware({ app, path: "/graphql" });
-    
   } catch (error) {
     console.log(error);
   }
-})();
-
-module.exports.handler = serverless(app);
+  // and here
+  return result;
+};

@@ -24,16 +24,19 @@ const index_1 = __importDefault(require("./DB/index"));
 const UserResolver_1 = require("./resolvers/UserResolver");
 const PORT = process.env.PORT || "3000";
 const app = express_1.default();
-(() => __awaiter(void 0, void 0, void 0, function* () {
+const handler = serverless_http_1.default(app);
+module.exports.handler = (event, context) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield handler(event, context);
+    // and here
+    app.use(/\/((?!graphql).)*/, body_parser_1.default.urlencoded({
+        limit: "50mb",
+        extended: true
+    }));
+    app.use(/\/((?!graphql).)*/, body_parser_1.default.json({
+        limit: "50mb"
+    }));
+    (() => __awaiter(void 0, void 0, void 0, function* () { }))();
     try {
-        // Initialize the app
-        app.use(/\/((?!graphql).)*/, body_parser_1.default.urlencoded({
-            limit: "50mb",
-            extended: true
-        }));
-        app.use(/\/((?!graphql).)*/, body_parser_1.default.json({
-            limit: "50mb"
-        }));
         app.use(express_ip_1.default().getIpInfoMiddleware); //* get the user location data
         app.use((req, res, next) => {
             res.setHeader("Access-Control-Allow-Origin", "*"); //* dominios por donde se permite el acceso
@@ -68,6 +71,7 @@ const app = express_1.default();
     catch (error) {
         console.log(error);
     }
-}))();
-module.exports.handler = serverless_http_1.default(app);
+    // and here
+    return result;
+});
 //# sourceMappingURL=index.js.map
