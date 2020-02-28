@@ -60,6 +60,7 @@ const PORT = process.env.PORT || "3000";
             introspection: true
         });
         // The GraphQL endpoint
+        server.applyMiddleware({ app, path: "/graphql" });
         // Start the server
         yield index_1.default();
         app.listen(PORT, () => {
