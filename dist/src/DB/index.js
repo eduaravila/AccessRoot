@@ -25,7 +25,7 @@ const connect_db = () => __awaiter(void 0, void 0, void 0, function* () {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             });
-        return Promise.resolve({ msg: "Data base conected", db });
+        return Promise.resolve({ msg: "Data base conected" });
     }
     catch (error) {
         console.log(error);

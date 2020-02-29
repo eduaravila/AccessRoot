@@ -8,6 +8,7 @@
     "webpack": "webpack",
     "postinstall": "netlify-lambda install",
     "start-live": "nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev",
+    "start": "nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev",
     "build": "tsc"
   },
   "author": "Eduardo Avila",
