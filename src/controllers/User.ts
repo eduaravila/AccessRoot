@@ -153,10 +153,9 @@ export const restorePasswordCompareCode = async (
   { body }: any
 ) => {
   try {
-    console.log(code);
-
     let localToken = await Jwt.validateToken(token);
     let tokenData: any = await Jwt.decrypt_data(localToken)();
+    console.log(code, localToken, tokenData);
     let userInfo = await userModel.findOne({
       username: tokenData.username
     });

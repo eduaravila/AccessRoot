@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { v4 } from "uuid";
 
 import { encrypt, decrypt } from "./crypt";
 
@@ -56,6 +57,7 @@ class Token {
         this.token = await jwt.sign(this.data, process.env.SECRET, {
           algorithm: "HS256",
           expiresIn,
+          jwtid: v4(),
           issuer: process.env.APP_NAME,
           audience: "GENERAL"
         });

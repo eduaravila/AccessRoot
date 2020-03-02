@@ -121,9 +121,9 @@ exports.restorePasswordCode = (email, { body }) => __awaiter(void 0, void 0, voi
 });
 exports.restorePasswordCompareCode = ({ code, token }, { body }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(code);
         let localToken = yield jwt_1.default.validateToken(token);
         let tokenData = yield jwt_1.default.decrypt_data(localToken)();
+        console.log(code, localToken, tokenData);
         let userInfo = yield User_1.default.findOne({
             username: tokenData.username
         });
