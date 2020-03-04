@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -34,7 +33,7 @@ let transporter = nodemailer_1.default.createTransport({
         cacheTreshold: 100 * 1024
     }
 });
-exports.verification_email = (userMail, username, code) => __awaiter(void 0, void 0, void 0, function* () {
+exports.verification_email = (userMail, username, code) => __awaiter(this, void 0, void 0, function* () {
     try {
         let logoPath = path_1.default.join(__dirname, "..", "assets", "images", "ecolote.png");
         let logoInstagram = path_1.default.join(__dirname, "..", "assets", "images", "instagram2x.png");
@@ -57,7 +56,7 @@ exports.verification_email = (userMail, username, code) => __awaiter(void 0, voi
                 cid: "linkedin"
             }
         ];
-        yield Promise.all(actualAttachments.map((i) => __awaiter(void 0, void 0, void 0, function* () {
+        yield Promise.all(actualAttachments.map((i) => __awaiter(this, void 0, void 0, function* () {
             if (yield fs_1.default.existsSync(i.path)) {
                 finalAttachments = [...finalAttachments, i];
             }
@@ -78,7 +77,7 @@ exports.verification_email = (userMail, username, code) => __awaiter(void 0, voi
         return Promise.reject(error);
     }
 });
-exports.password_reset_mail = (userMail, username, code) => __awaiter(void 0, void 0, void 0, function* () {
+exports.password_reset_mail = (userMail, username, code) => __awaiter(this, void 0, void 0, function* () {
     try {
         let logoPath = path_1.default.join(__dirname, "..", "assets", "images", "ecolote.png");
         let logoInstagram = path_1.default.join(__dirname, "..", "assets", "images", "instagram2x.png");
@@ -101,7 +100,7 @@ exports.password_reset_mail = (userMail, username, code) => __awaiter(void 0, vo
                 cid: "linkedin"
             }
         ];
-        yield Promise.all(actualAttachments.map((i) => __awaiter(void 0, void 0, void 0, function* () {
+        yield Promise.all(actualAttachments.map((i) => __awaiter(this, void 0, void 0, function* () {
             if (yield fs_1.default.existsSync(i.path)) {
                 finalAttachments = [...finalAttachments, i];
             }

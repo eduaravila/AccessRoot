@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -30,7 +29,7 @@ class Token {
                 let nuevo = {};
                 llave_objeto.map((i) => {
                     if (i != "iat" && i != "exp") {
-                        nuevo = Object.assign(Object.assign({}, nuevo), { [i]: crypt_1.decrypt(object_data[i]) });
+                        nuevo = Object.assign({}, nuevo, { [i]: crypt_1.decrypt(object_data[i]) });
                     }
                 });
                 return Promise.resolve(nuevo);
@@ -45,7 +44,7 @@ class Token {
             try {
                 let llave_objeto = Object.keys(this.data);
                 let nuevo = {};
-                llave_objeto.map((i) => (nuevo = Object.assign(Object.assign({}, nuevo), { [i]: crypt_1.encrypt(this.data[i]) })));
+                llave_objeto.map((i) => (nuevo = Object.assign({}, nuevo, { [i]: crypt_1.encrypt(this.data[i]) })));
                 return Promise.resolve(nuevo);
             }
             catch (error) {

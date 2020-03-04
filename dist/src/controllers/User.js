@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -19,7 +18,7 @@ const PreUser_1 = __importDefault(require("../models/User/PreUser"));
 const jwt_1 = __importDefault(require("../utils/jwt"));
 const mailer_1 = require("../utils/mailer");
 const PreUser_2 = __importDefault(require("../models/User/PreUser"));
-exports.register = ({ username, password, email }, context) => __awaiter(void 0, void 0, void 0, function* () {
+exports.register = ({ username, password, email }, context) => __awaiter(this, void 0, void 0, function* () {
     try {
         let { country = " ", region = "", city = "", timezone = "", ll = [] } = context.ipInfo;
         let new_user = new PreUser_1.default({
@@ -47,7 +46,7 @@ exports.register = ({ username, password, email }, context) => __awaiter(void 0,
         throw new apollo_server_express_1.ApolloError(error);
     }
 });
-exports.verifyAccount = ({ code, token }, context) => __awaiter(void 0, void 0, void 0, function* () {
+exports.verifyAccount = ({ code, token }, context) => __awaiter(this, void 0, void 0, function* () {
     try {
         let localToken = yield jwt_1.default.validateToken(token);
         let tokenData = yield jwt_1.default.decrypt_data(localToken)();
@@ -74,7 +73,7 @@ exports.verifyAccount = ({ code, token }, context) => __awaiter(void 0, void 0, 
         throw new apollo_server_express_1.ApolloError(error);
     }
 });
-exports.resendVerifyCode = (username, context) => __awaiter(void 0, void 0, void 0, function* () {
+exports.resendVerifyCode = (username, context) => __awaiter(this, void 0, void 0, function* () {
     try {
         let code = randomatic_1.default("0", 6);
         let user = yield PreUser_1.default.findOne({ username });
@@ -88,7 +87,7 @@ exports.resendVerifyCode = (username, context) => __awaiter(void 0, void 0, void
         throw new apollo_server_express_1.ApolloError(error);
     }
 });
-exports.login = ({ user, password }, { body }) => __awaiter(void 0, void 0, void 0, function* () {
+exports.login = ({ user, password }, { body }) => __awaiter(this, void 0, void 0, function* () {
     try {
         let userId = yield User_1.default.findOne({
             $or: [{ username: user }, { email: user }]
@@ -101,7 +100,7 @@ exports.login = ({ user, password }, { body }) => __awaiter(void 0, void 0, void
         throw new apollo_server_express_1.ApolloError(error);
     }
 });
-exports.restorePasswordCode = (email, { body }) => __awaiter(void 0, void 0, void 0, function* () {
+exports.restorePasswordCode = (email, { body }) => __awaiter(this, void 0, void 0, function* () {
     try {
         let code = randomatic_1.default("0", 6);
         let user = yield User_1.default.findOne({ email });
@@ -119,7 +118,7 @@ exports.restorePasswordCode = (email, { body }) => __awaiter(void 0, void 0, voi
         throw new apollo_server_express_1.ApolloError(error);
     }
 });
-exports.restorePasswordCompareCode = ({ code, token }, { body }) => __awaiter(void 0, void 0, void 0, function* () {
+exports.restorePasswordCompareCode = ({ code, token }, { body }) => __awaiter(this, void 0, void 0, function* () {
     try {
         let localToken = yield jwt_1.default.validateToken(token);
         let tokenData = yield jwt_1.default.decrypt_data(localToken)();
@@ -139,7 +138,7 @@ exports.restorePasswordCompareCode = ({ code, token }, { body }) => __awaiter(vo
         throw new apollo_server_express_1.ApolloError(error);
     }
 });
-exports.restorePasswordSetNew = ({ code, token, password }, { body }) => __awaiter(void 0, void 0, void 0, function* () {
+exports.restorePasswordSetNew = ({ code, token, password }, { body }) => __awaiter(this, void 0, void 0, function* () {
     try {
         let localToken = yield jwt_1.default.validateToken(token);
         let tokenData = yield jwt_1.default.decrypt_data(localToken)();
@@ -159,7 +158,7 @@ exports.restorePasswordSetNew = ({ code, token, password }, { body }) => __await
         throw new apollo_server_express_1.ApolloError(error);
     }
 });
-exports.deletePreUser = (username) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deletePreUser = (username) => __awaiter(this, void 0, void 0, function* () {
     try {
         let userInfo = yield PreUser_2.default.findOneAndDelete({
             username
