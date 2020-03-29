@@ -4,8 +4,12 @@
   "description": "Access root ecolote microservice",
   "main": "index.js",
   "scripts": {
+    "build-ts": "tsc",
+    "postinstall": "npm run build-ts",
     "test": "jest --setupFiles dotenv/config --forceExit --detectOpenHandles",
-    "dev": "concurrently -k \"tsc --watch\" \"nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev\""
+    "prestart": "copyfiles ecolote.com.priv ./dist/src/utils/certificates",
+    "dev": "concurrently -k \"tsc --watch\" \"nodemon -r dotenv/config ./dist/src/index.js dotenv_config_path=./.env.dev\"",
+    "start": "node ./dist/src/index.js"
   },
   "author": "Eduardo Avila",
   "license": "ISC",
@@ -33,6 +37,7 @@
     "bufferutil": "^4.0.1",
     "class-validator": "^0.11.0",
     "concurrently": "^5.1.0",
+    "copyfiles": "^2.2.0",
     "crypto-js": "^3.3.0",
     "dotenv": "^8.2.0",
     "encoding": "^0.1.12",

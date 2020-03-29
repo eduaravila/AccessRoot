@@ -113,6 +113,9 @@ export const resendVerifyCode = async (username: string, context: any) => {
 
 export const login = async ({ user, password }: loginType, { body }: any) => {
   try {
+    if (!(await userModel.checkPassword(user, password))) {
+      throw Error("invalid password");
+    }
     let userId = await userModel.findOne({
       $or: [{ username: user }, { email: user }]
     });
