@@ -4,3 +4,4 @@ dist/
 .env.prod
 package-lock.jsonecolote.com.priv
 ecolote.com.pub
+ecolote.com.priv
